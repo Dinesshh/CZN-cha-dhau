@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HTML</title>
+	<style type="text/css">
+		.green{
+			background: #6a2;
+		}
+		.red{
+			background: #f23;.
+		}
+	</style>
+</head>
+<body>
+	<pre>
+<h1>Marks</h1>
+<?php 
+$marks = [
+	['name' => 'Ram','roll' => 23,'sl' => 78,'dbms' => 65,'nm' => 37,'os' => 87,'se' => 78,'project' => 90],
+	['name' => 'Pandey Ji','roll' => 27,'sl' => 45,'dbms' => 65,'nm' => 73,'os' => 45,'se' => 98,'project' => 23],
+	['name' => 'Sushant','roll' => 33,'sl' => 35,'dbms' => 98,'nm' => 65,'os' => 60,'se' => 75,'project' => 75]
+];
+ ?>
+<table border="1">
+	<tr>
+		<th>SN</th>
+		<th>Name</th>
+		<th>Roll</th>
+		<th>SL</th>
+		<th>DBMS</th>
+		<th>NM</th>
+		<th>SE</th>
+		<th>OS</th>
+		<th>Project</th>
+		<th>Total</th>
+		<th>Result</th>
+		<th>Percent</th>
+		<th>Division</th>
+	</tr>
+	<?php for ($i=0; $i < count($marks) ; $i++) {
+
+			$total = $marks[$i]['sl'] + $marks[$i]['dbms'] + $marks[$i]['se']+ $marks[$i]['nm']+ $marks[$i]['os']+ $marks[$i]['project'];
+
+			$result  = 'Fail';
+			$percent = '-';
+			$division = '-';
+			if ($marks[$i]['sl'] >= 35 && $marks[$i]['os'] >= 35 && $marks[$i]['dbms'] >= 35 && $marks[$i]['nm'] >= 35 && $marks[$i]['se'] >= 35 && $marks[$i]['project'] >= 35  ) {
+				$result  = 'Pass';
+				$percent = round($total / 6,2);
+
+				if ($percent >= 80 ) {
+					$division = 'Distinction';
+				} else if ($percent >= 60 && $percent < 80) {
+					$division = 'First';
+				} else if ($percent >= 50 && $percent < 60) {
+					$division = 'Second';
+				} else if ($percent >= 35 && $percent < 50) {
+					$division = 'Third';
+				}
+			}
+
+			if ($result == 'Pass') {
+				$class = 'green';
+			} else {
+				$class = 'red';
+			}
+
+	 ?>
+		<tr class="<?php echo $class ?>">
+			<td><?php echo $i+1 ?></td>
+			<td><?php echo $marks[$i]['name'] ?></td>
+			<td><?php echo $marks[$i]['roll'] ?></td>
+			<td><?php echo $marks[$i]['sl'] ?></td>
+			<td><?php echo $marks[$i]['dbms'] ?></td>
+			<td><?php echo $marks[$i]['nm'] ?></td>
+			<td><?php echo $marks[$i]['se'] ?></td>
+			<td><?php echo $marks[$i]['os'] ?></td>
+			<td><?php echo $marks[$i]['project'] ?></td>
+			<td><?php echo $total; ?></td>
+			<td><?php echo $result; ?></td>
+			<td><?php echo $percent; ?></td>
+			<td><?php echo $division; ?></td>
+		</tr>
+	<?php } ?>
+</table>
+</body>
+</html>
